@@ -1,8 +1,9 @@
 % See ../README.md for details
 
 %%%% CONSTANTS %%%%%%%%
-% Current image being read
+% Current folder and image being read
 FOLDER = '4';
+IM_NAME = 'original.jpg'
 
 % Shift % range searched (0.0 ~ 1.0)
 max_shift = 0.08;
@@ -12,7 +13,7 @@ shift_pts = 20;
 %%%%%%%%%%%%%%%%%%%%%%%
 
 % Read image and convert to double
-img = imread(fullfile('../img/', FOLDER, '/original.jpg'));
+img = imread(fullfile('../img/', FOLDER, IM_NAME));
 img = im2double(img);
 
 % Crop the image horizontally into the 3 images
