@@ -51,7 +51,7 @@ Proceeded as described. Was able to recover image.
 
 Respectively, original and recovered:
 
-![](img/toygc.jpg)
+![](img/toygc.png)
 
 ![](img/toy-recover.jpg)
 
