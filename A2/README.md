@@ -14,6 +14,7 @@ Our objective is to seamlessly copy the fish from `src` into `dst`.
 Please note that the fish image was adjusted so that it has the same dimensions
 as the underwater image. This facilitates code and calculations.
 
+
 ## Binary Mask and Pixel Copying
 
 In order to insert part of the source image into the destination image,
@@ -22,10 +23,11 @@ The binary mask determines which pixels get copied over from `src` to `dst`.
 
 The example below illustrates the use of a binary mask containing
 a rectangular zone with `1`-valued pixels, and the rest being `0`-valued.
- 
+
 The code for this is found in `src/simple_binary_mask.m`.
 
 ![](img/binary.jpg)
+
 
 ## Alpha Blending
 
@@ -41,6 +43,10 @@ greater than 0, linearly scaling from 0 on the edges, to 1 on the center.
 The code for this is found in `src/simple_alpha_blending.m`.
 
 ![](img/alpha.jpg)
+
+
+## Poisson Blending
+
 
 
 ## Results

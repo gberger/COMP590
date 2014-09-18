@@ -4,10 +4,12 @@ dst = imread('../img/underwater.jpg');
 w = size(src, 1);
 h = size(src, 2);
 
-load('mask.mat');
+mask = zeros(w, h);
 
-for i = 1:w
-    for j = 1:h
+mask(450:850, 550:1000) = 1;
+
+for i = 1:dst_width
+    for j = 1:dst_height
         if mask(i, j)
             dst(i, j, :) = src(i, j, :);
         end
