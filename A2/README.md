@@ -47,6 +47,38 @@ The code for this is found in `src/simple_alpha_blending.m`.
 
 ## Poisson Blending
 
+(Note: images here were resized to 30%.)
+
+This is gradient domain fusion using poisson blending.
+
+The result image is obtained from a least squares problem, represented by the following equation:
+
+```
+A x = b
+```
+
+Where `A` is a `N x N` matrix (`N = width * height`), and `b` and `x` are a `N`-sized column vectors.
+
+`A` is called the coefficients matrix, `x` is the output image, and `b` is the desired gradient matrix.
+
+For pixels outside the masked region, the output pixel is simply equal to the destination matrix.
+For these, the corresponding row in the matrix A is the same as in the identity matrix, and the
+corresponding value in the vector b is simply the same pixel as the destination image.
+
+However, for pixels inside the masked region, it gets a little more complicated. The output pixel 
+depends on the neighbors. Specifically, we wish to satisfy the following equation:
+
+```
+4 * x(i,j) - x(i+1, j) - x(i-1, j) - x(i, j+1) - x(i, j-1) = b(i,j) = grad(src, i, j).
+```
+
+We express this equation by filling the appropriate cells in the coefficient matrix with 4 and -1, 
+and the corresponding value in `b` with the gradient at the same pixel in the source image.
+
+We can then obtain `x` using `x = A \ b` in MATLAB, and reshape it into the original image
+dimensions, to get our final result:
+
+![](img/poisson.jpg)
 
 
 ## Results
