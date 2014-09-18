@@ -1,30 +1,27 @@
 src = imread('../img/fish.jpg');
 dst = imread('../img/underwater.jpg');
 
-src_width = size(src, 1);
-src_height = size(src, 2);
+w = size(src, 1);
+h = size(src, 2);
 
-offset_i = 400;
-offset_j = 400;
+mask = zeros(w, h);
 
-mask = zeros(src_width, src_height);
-
-cx = 250;
-cy = 350;
+cx = 650;
+cy = 750;
 r  = 250;
 
-for i = 1:src_width
-    for j = 1:src_height
+for i = cx-r:cx+r
+    for j = cy-r:cy+r
         if incircle(cx, cy, r, i, j)
             mask(i, j) = (1 - dist(cx, cy, i, j)/r);
         end
     end
 end
    
-for i = 1:src_width
-    for j = 1:src_height
-        dst(i+offset_i, j+offset_j, :) = mask(i, j)*src(i, j, :) + (1-mask(i, j))*dst(i+offset_i, j+offset_j, :);
+for i = 1:w
+    for j = 1:h
+        dst(i, j, :) = mask(i, j)*src(i, j, :) + (1-mask(i, j))*dst(i, j, :);
     end
 end
 
-imwrite(dst, '../img/alpha.jpg');
+imshow(dst);

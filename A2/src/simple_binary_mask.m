@@ -1,20 +1,17 @@
 src = imread('../img/fish.jpg');
 dst = imread('../img/underwater.jpg');
 
-src_width = size(src, 1);
-src_height = size(src, 2);
+w = size(src, 1);
+h = size(src, 2);
 
-offset_i = 400;
-offset_j = 400;
+mask = zeros(w, h);
 
-mask = zeros(src_width, src_height);
+mask(450:850, 550:1000) = 1;
 
-mask(50:450, 150:600) = 1;
-
-for i = 1:src_width
-    for j = 1:src_height
+for i = 1:dst_width
+    for j = 1:dst_height
         if mask(i, j)
-            dst(i+offset_i, j+offset_j, :) = src(i, j, :);
+            dst(i, j, :) = src(i, j, :);
         end
     end
 end

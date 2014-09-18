@@ -3,7 +3,7 @@
 
 ## Overview
 
-Throughout the lecture we will be referencing these to the
+Throughout the lecture we will be referencing to the
 following two images as `src` and `dst`, respectively.
 
 Our objective is to seamlessly copy the fish from `src` into `dst`.
@@ -11,18 +11,18 @@ Our objective is to seamlessly copy the fish from `src` into `dst`.
 ![](img/fish.jpg)
 ![](img/underwater.jpg)
 
+Please note that the fish image was adjusted so that it has the same dimensions
+as the underwater image. This facilitates code and calculations.
+
 ## Binary Mask and Pixel Copying
 
 In order to insert part of the source image into the destination image,
-we need a binary mask and an offset.
-
+we need a binary mask.  
 The binary mask determines which pixels get copied over from `src` to `dst`.
-
-The offset determines where they'll be placed initially.
 
 The example below illustrates the use of a binary mask containing
 a rectangular zone with `1`-valued pixels, and the rest being `0`-valued.
-An offset is also used.  
+ 
 The code for this is found in `src/simple_binary_mask.m`.
 
 ![](img/binary.jpg)
