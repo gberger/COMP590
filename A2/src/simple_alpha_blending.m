@@ -1,5 +1,5 @@
-src = imread('fish.jpg');
-dst = imread('underwater.jpg');
+src = imread('../img/fish.jpg');
+dst = imread('../img/underwater.jpg');
 
 src_width = size(src, 1);
 src_height = size(src, 2);
@@ -27,4 +27,4 @@ for i = 1:src_width
     end
 end
 
-imshow(dst);
+imwrite(dst, '../img/alpha.jpg');
