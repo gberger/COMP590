@@ -40,7 +40,7 @@ greater than 0, linearly scaling from 0 on the edges, to 1 on the center.
 
 The code for this is found in `src/simple_alpha_blending.m`.
 
-![](img/apha.jpg)
+![](img/alpha.jpg)
 
 
 ## Results
