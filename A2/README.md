@@ -45,6 +45,17 @@ The code for this is found in `src/simple_alpha_blending.m`.
 ![](img/alpha.jpg)
 
 
+## Toy Problem
+
+Proceeded as described. Was able to recover image.
+
+Respectively, original and recovered:
+
+![](img/toygc.jpg)
+
+![](img/toy-recover.jpg)
+
+
 ## Poisson Blending
 
 (Note: images here were resized to 30%.)
