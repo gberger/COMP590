@@ -96,6 +96,21 @@ dimensions, to get our final result:
 The code for this is found in `src/poisson_blending.m`.
 
 
+## Graph Cuts
+
+In the `src/maxflow` folder, we have a MaxFlow library by Dr. Wittman, found [here](http://www.math.ucla.edu/~wittman/Fields/).
+
+The maxflow function provided in this library takes as input two matrix: a `A` `N x N` matrix defining the 
+weights for the edges between each of the N pixels, and a `T` `N x 2` matrix defining weights between each
+pixel and the source, and each pixel and the sink. 
+
+In `part2.m`, we read an image, convert it to grayscale, and build `A` using some auxiliary functions
+provided by the maxflow library. The weight between each pixel is equivalent to the square difference between
+their values.
+
+Then, `T` is built by 
+
+
 ## Code
 
 The code is in the `src` folder.
