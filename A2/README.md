@@ -1,5 +1,6 @@
 # Assignment 2 - Image Composition
 
+# Part 1
 
 ## Overview
 
@@ -95,23 +96,83 @@ dimensions, to get our final result:
 
 The code for this is found in `src/poisson_blending.m`.
 
-
-## Graph Cuts
-
-In the `src/maxflow` folder, we have a MaxFlow library by Dr. Wittman, found [here](http://www.math.ucla.edu/~wittman/Fields/).
-
-The maxflow function provided in this library takes as input two matrix: a `A` `N x N` matrix defining the 
-weights for the edges between each of the N pixels, and a `T` `N x 2` matrix defining weights between each
-pixel and the source, and each pixel and the sink. 
-
-In `part2.m`, we read an image, convert it to grayscale, and build `A` using some auxiliary functions
-provided by the maxflow library. The weight between each pixel is equivalent to the square difference between
-their values.
-
-Then, `T` is built by 
-
-
 ## Code
 
 The code is in the `src` folder.
 
+
+
+# Part 2 - Graph Cuts
+
+## Overview
+
+Our objective is to find an image segmentation between background and foreground using graph cuts. 
+
+Based on crude human input of the foreground or background, we can use a max-flow/min-cut algorithm
+to obtain a graph cut that separates the foreground and the background.
+
+We continue using the same base images as before, but now they are smaller for performance reasons.
+
+
+## Maxflow
+
+The maxflow function provided in this library takes as input two sparse matrices: a `A` `N x N` matrix defining the 
+weights for the edges between each of the N pixels, and a `T` `N x 2` matrix defining weights between each
+pixel and the source, and each pixel and the sink. 
+
+These matrices actually represent a graph where each pixel is connected to its 4 neighbors, and all pixels
+are connected both to the source and to the sink.
+
+
+## Edges between a pixel and a neighbor pixel
+
+For the weight of the edges between pixels, we calculated the square difference between the two pixels for
+each color value and summed them.
+
+Also, the weights are adjusted so they fit in the range of 0 to 1.
+
+
+## Edges between a pixel and the source or the sink
+
+We want these edges to represent the probability that a pixel belongs to the foreground (source) or
+to the background (sink).
+
+We construct histogram bins for the foreground and for the background, with 8 different bins, with the `histc` function.  
+The histograms are smoothed by the `smooth` function, with a window width of 3.  
+Finally, we adjust so that the values are between 0 and 1.
+
+Then, for each pixel in the image, we find its respective bin in each of the histograms, and map to the value stored. The product of these 3 values (for the 3 color channels) makes up the weight between the pixel and the foreground/background. As always, we scale it to between 0 and 1.
+
+
+## Finding the graph cut
+
+Now, it is a matter of executing the library to find the graph cut and then use it as a mask for the
+code in Part 1.
+
+
+## Results
+
+The graph cut was performed on this fish, using this manual mask.
+
+![](img/fish2.jpg)
+![](img/fish2-mask.bmp)
+
+We can look at the values in `T`, representing the weight between each pixel and the source/sink.
+
+![](img/fish2-source.jpg)
+![](img/fish2-sink.jpg)
+
+The graph cut solution found is represented by this mask:
+
+![](img/fish2-graphcut.jpg)
+
+Finally, using Poisson blending to blend that into the greener sea image, we get this result.
+
+![](img/fish2-final.jpg)
+
+
+## Code
+
+The code is in the `src/maxflow` folder. All files in it are from a MaxFlow library by Dr. Wittman, found [here](http://www.math.ucla.edu/~wittman/Fields/).
+
+The implementation discussed here resides in the file `part2.m`. 
