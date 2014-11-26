@@ -25,7 +25,7 @@ A better way is taking an algorithmic approach of obtaining corresponding keypoi
 
 An advantage of this approach is that we can much more quickly obtain more points than when entering them manually. Also, the results are better.
 
-Code for this is in the `SIFT` function and was taken from vlfeat.org.
+Code for this is in the `SIFT` function and was taken from an example on vlfeat.org.
 
 ## Homography
 
@@ -74,7 +74,9 @@ In the file `code`, it's possible to see how all the different functions are com
 
 The source code can be found in the `src` folder.
 
-## Images
+Dependency: the [VLFeat Library](http://www.vlfeat.org).
+
+## Source Images
 
 The source images are from [VisualSize](http://www.visualsize.com/mosaic3d/index.php).
 
