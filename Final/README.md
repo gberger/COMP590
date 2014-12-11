@@ -54,7 +54,7 @@ Because the histograms are normalized, we can actually use reduced versions of t
 
 We save the described dataset in a MAT-file, to be loaded into Matlab later. A dataset has been prebuilt and is available in `dataset/dataset.mat`. It uses 8 H-bins, 12 S-bins and 3 V-bins.
 
-The code for this is available in `src/searcher.m`.
+The code for this is available in `src/build_dataset.m`.
 
 ## Searching the Dataset
 
@@ -71,6 +71,8 @@ Our search of the dataset will consist of simply sorting the images in the datas
 A possible improvement over this is using a K-Max algorithm, which allows us to more efficiently query for the top 10 images, for example. Naïve searching and sorting over N images has time complexity of `O(N lg N)`, while getting only the top K has time complexity of `O(N lg K)`. 
 
 Other approaches to this include using other algorithms, such as tree or graph algorithms, or clustering.
+
+The code for this is available in `src/searcher`, with the CSD comparator being available in `src/comparator`.
 
 ## Results
 
