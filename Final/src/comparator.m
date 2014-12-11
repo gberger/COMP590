@@ -1,6 +1,7 @@
 function [ dist ] = comparator( a, b )
 %COMPARATOR
-%  
+% takes two vectors
+% returns a measure of similarity between them
 
     dist = chi_squared_distance(a, b);
 end

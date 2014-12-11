@@ -49,16 +49,20 @@ function [hist] = get_hist(im, mask, h_bins, s_bins, v_bins)
     
     hist = zeros(5, h_bins, s_bins, v_bins);
     
+    % these are HxW matrixes, with each value being
+    % the H/S/V bin that the corresponding pixel falls in
     hh = fix(im(:,:,1) .* (h_bins-1) + 1);
     ss = fix(im(:,:,2) .* (s_bins-1) + 1);
     vv = fix(im(:,:,3) .* (v_bins-1) + 1);
 
+    % for each pixel, add 1 to the appropriate histogram
     for i=1:h
         for j=1:w
             hist(mask(i,j), hh(i,j), ss(i,j), vv(i,j)) = 1 + hist(mask(i,j), hh(i,j), ss(i,j), vv(i,j));
         end
     end
     
+    % normalize per-region histograms
     for i=1:5
         temp = hist(i,:,:,:);
         hist(i,:,:,:) = temp / max(temp(:));

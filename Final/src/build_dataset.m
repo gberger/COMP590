@@ -1,7 +1,6 @@
 function [ dataset_names, dataset_features ] = build_dataset(directory, filename)
     list = dir(strcat(directory, '/*.jpg'));
-
-    [n, tmp] = size(list);
+    n = size(list, 1);
 
     MASKS = 5;
     h_bins = 8;
@@ -14,23 +13,30 @@ function [ dataset_names, dataset_features ] = build_dataset(directory, filename
     
     i = 1;
     for file = list'
-        dataset_names{i} = file.name;
         im = imread(strcat('../img/', file.name));
-       
-        [h, w, colors] = size(im);
+        imr = resize_constraint(im, 300);
         
-        if h > w
-           imr = imresize(im, [300 NaN]);
-        else
-           imr = imresize(im, [NaN 300]);
-        end
-        
-        features = descriptor(imr, h_bins, s_bins, v_bins);
-        
-        dataset_features(i,:) = features;
+        dataset_names{i} = file.name;
+        dataset_features(i,:) = descriptor(imr, h_bins, s_bins, v_bins);;
 
         i = i+1;
     end
 
     save(filename, 'dataset_names', 'dataset_features');
+end
+
+function [ imr ] = resize_constraint(im, cons)
+    % resizes an image to be at most cons x cons.
+    % maintains aspect ratio
+
+    h = size(im, 1);
+    w = size(im, 2);
+
+    % resize image to at most 300x300
+    if h > w
+       imr = imresize(im, [cons NaN]);
+    else
+       imr = imresize(im, [NaN cons]);
+    end
+
 end
