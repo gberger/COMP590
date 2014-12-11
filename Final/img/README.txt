@@ -1,0 +1,1 @@
+Please obtain the images from http://lear.inrialpes.fr/people/jegou/data.php and put them into this folder.
